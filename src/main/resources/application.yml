@@ -1,1 +1,20 @@
-spring.application.name=table-tennis
+spring:
+  application:
+    name: table-tennisCa
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+        max-page-size: 200
+
+logging.level:
+  org.hibernate.SQL: debug
