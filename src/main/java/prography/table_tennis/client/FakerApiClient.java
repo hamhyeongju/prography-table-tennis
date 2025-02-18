@@ -13,6 +13,6 @@ public interface FakerApiClient {
     FakeUserResponse getUsers(
             @RequestParam("_seed") int seed,
             @RequestParam("_quantity") int quantity,
-            @RequestParam("_locale") String locale
+            @RequestParam(value = "_locale", defaultValue = "ko_KR") String locale
     );
 }
