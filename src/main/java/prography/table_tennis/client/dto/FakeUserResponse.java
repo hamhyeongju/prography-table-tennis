@@ -8,5 +8,5 @@ import java.util.List;
 @Getter
 @Setter
 public class FakeUserResponse {
-    private List<FakeUser> fakeUsers;
+    private List<FakeUser> data;
 }
