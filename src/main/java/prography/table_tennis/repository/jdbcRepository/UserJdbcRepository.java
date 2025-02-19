@@ -1,6 +1,6 @@
 package prography.table_tennis.repository.jdbcRepository;
 
-import dto.UserBulkInsertDto;
+import prography.table_tennis.dto.UserBulkInsertDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

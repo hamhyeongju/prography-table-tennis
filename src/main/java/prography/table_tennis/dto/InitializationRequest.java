@@ -1,4 +1,4 @@
-package dto;
+package prography.table_tennis.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
