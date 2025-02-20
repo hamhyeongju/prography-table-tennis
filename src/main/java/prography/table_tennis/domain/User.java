@@ -16,5 +16,11 @@ public class User extends BaseTimeEntity {
     private Integer fakerId;
     private String name;
     private String email;
-    private String status;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id")
+    private Room room;
 }

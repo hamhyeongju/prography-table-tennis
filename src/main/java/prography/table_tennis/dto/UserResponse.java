@@ -24,7 +24,7 @@ public class UserResponse {
         this.fakerId = user.getFakerId();
         this.name = user.getName();
         this.email = user.getEmail();
-        this.status = user.getStatus();
+        this.status = user.getStatus().name();
         this.createdAt = user.getCreatedAt();
         this.updatedAt = user.getUpdatedAt();
     }
