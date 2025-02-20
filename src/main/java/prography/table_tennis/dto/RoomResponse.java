@@ -17,7 +17,7 @@ public class RoomResponse {
     public RoomResponse(Room room) {
         this.id = room.getId();
         this.title = room.getTitle();
-        this.hostId = room.getHost();
+        this.hostId = room.getHost().getId();
         this.roomType = room.getRoomType();
         this.status = room.getStatus();
     }

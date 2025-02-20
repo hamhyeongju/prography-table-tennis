@@ -12,7 +12,13 @@ public class UserRoom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_room_id")
     private Integer id;
-    private Integer roomId;
-    private Integer userId;
+
+    @OneToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     private String team; // RED, BLUE
 }

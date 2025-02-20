@@ -13,14 +13,20 @@ public class Room extends BaseTimeEntity {
     @Column(name = "room_id")
     private Integer id;
     private String title;
-    private Integer host; // userId
 
     @Enumerated(EnumType.STRING)
     private RoomType roomType; // SINGLE, DOUBLE
     @Enumerated(EnumType.STRING)
     private RoomStatus status; // WAIT, PROGRESS, FINISH
 
-    public static Room of(String title, Integer host, RoomType roomType) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "host")
+    private User host; // userId
+
+    @OneToOne(mappedBy = "room")
+    private UserRoom userRoom;
+
+    public static Room of(String title, User host, RoomType roomType) {
         Room room = new Room();
         room.title = title;
         room.host = host;

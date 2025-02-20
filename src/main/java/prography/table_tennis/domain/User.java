@@ -3,6 +3,8 @@ package prography.table_tennis.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -20,7 +22,9 @@ public class User extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id")
-    private Room room;
+    @OneToMany(mappedBy = "host")
+    private List<Room> rooms;
+
+    @OneToOne(mappedBy = "user")
+    private UserRoom userRoom;
 }
