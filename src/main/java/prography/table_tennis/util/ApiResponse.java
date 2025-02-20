@@ -21,6 +21,12 @@ public class ApiResponse<T> {
         this.result = result;
     }
 
+    // error response
+    public ApiResponse(ApiResponseStatus status) {
+        this.code = status.getCode();
+        this.message = status.getMessage();
+    }
+
     private void success() {
         this.code = SUCCESS.getCode();
         this.message = SUCCESS.getMessage();
