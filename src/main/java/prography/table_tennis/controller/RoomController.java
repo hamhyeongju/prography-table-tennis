@@ -3,9 +3,7 @@ package prography.table_tennis.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
-import prography.table_tennis.dto.CreateRoomRequest;
-import prography.table_tennis.dto.GetRoomResponse;
-import prography.table_tennis.dto.GetRoomsResponse;
+import prography.table_tennis.dto.*;
 import prography.table_tennis.service.RoomService;
 import prography.table_tennis.util.ApiResponse;
 
@@ -38,11 +36,21 @@ public class RoomController {
         return new ApiResponse<>(response);
     }
 
-
     @PostMapping("/room")
     public ApiResponse<Object> createRoom(@RequestBody CreateRoomRequest request) {
 
         roomService.createRoom(request);
+
+        return new ApiResponse<>();
+    }
+
+    @PostMapping("/room/attention/{roomId}")
+    public ApiResponse<Object> attention(
+            @RequestBody PostAttentionRequest request,
+            @PathVariable("roomId") int roomId
+            ) {
+
+        roomService.attention(request.getUserId(), roomId);
 
         return new ApiResponse<>();
     }

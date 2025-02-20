@@ -6,27 +6,29 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import prography.table_tennis.domain.Room;
-import prography.table_tennis.domain.User;
-import prography.table_tennis.domain.UserStatus;
+import prography.table_tennis.domain.*;
 import prography.table_tennis.dto.*;
 import prography.table_tennis.exception.DomainException;
 import prography.table_tennis.repository.RoomRepository;
 import prography.table_tennis.repository.UserRepository;
+import prography.table_tennis.repository.UserRoomRepository;
+import prography.table_tennis.util.TeamPolicy;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 @Slf4j
 public class RoomService {
 
     private final RoomRepository roomRepository;
     private final UserRepository userRepository;
+    private final UserRoomRepository userRoomRepository;
 
+    private final TeamPolicy teamPolicy;
 
+    @Transactional
     public void createRoom(CreateRoomRequest request) {
 
         User user = userRepository.findById(request.getUserId())
@@ -36,24 +38,27 @@ public class RoomService {
             throw new DomainException();
         }
 
-        if (!Objects.isNull(user.getRoom())) {
+        if (userRoomRepository.existsByUserId(user.getId())) {
             throw new DomainException();
         }
 
-        Room room = Room.of(request.getTitle(), request.getUserId(), request.getRoomType());
+        Room room = Room.of(request.getTitle(), user, request.getRoomType());
         roomRepository.save(room);
+
+        Team autoTeam = teamPolicy.createAutoTeam(room);
+        UserRoom userRoom = UserRoom.of(user, room, autoTeam);
+        userRoomRepository.save(userRoom);
     }
 
     public GetRoomsResponse getRooms(PageRequest request) {
 
-        System.out.println("11");
         Page<Room> findRooms = roomRepository.findAll(request);
-        System.out.println("@2");
+
         List<RoomResponse> roomResponses =
                 findRooms.getContent().
                         stream().map(RoomResponse
                                 ::new).toList();
-        System.out.println("33");
+
         return new GetRoomsResponse(
                 (int) findRooms.getTotalElements(),
                 findRooms.getTotalPages(),
@@ -65,5 +70,34 @@ public class RoomService {
                 .orElseThrow(DomainException::new);
 
         return new GetRoomResponse(findRoom);
+    }
+
+    @Transactional
+    public void attention(int userId, int roomId) {
+
+        // 유저가 이미 참가한 방이 존재
+        if (userRoomRepository.existsByUserId(userId)) {
+            throw new DomainException();
+        }
+
+        Room findRoom = roomRepository.findById(roomId)
+                .orElseThrow(DomainException::new);
+
+        // room wait 상태
+        if (!findRoom.getStatus().equals(RoomStatus.WAIT)) {
+            throw new DomainException();
+        }
+
+        User findUser = userRepository.findById(userId)
+                .orElseThrow(DomainException::new);
+
+        // user active 상태
+        if (!findUser.getStatus().equals(UserStatus.ACTIVE)) {
+            throw new DomainException();
+        }
+
+        Team autoTeam = teamPolicy.createAutoTeam(findRoom);
+        UserRoom userRoom = UserRoom.of(findUser, findRoom, autoTeam);
+        userRoomRepository.save(userRoom);
     }
 }
