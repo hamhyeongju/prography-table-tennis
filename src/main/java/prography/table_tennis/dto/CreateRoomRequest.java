@@ -2,12 +2,13 @@ package prography.table_tennis.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import prography.table_tennis.domain.RoomType;
 
 @Getter
 @Setter
 public class CreateRoomRequest {
 
     private int userId;
-    private String roomType;
+    private RoomType roomType;
     private String title;
 }

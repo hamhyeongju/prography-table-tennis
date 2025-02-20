@@ -14,6 +14,10 @@ public class Room extends BaseTimeEntity {
     private Integer id;
     private String title;
     private Integer host; // userId
-    private String roomType; // SINGLE, DOUBLE
-    private String status; // WAIT, PROGRESS, FINISH
+
+    @Enumerated(EnumType.STRING)
+    private RoomType roomType; // SINGLE, DOUBLE
+    @Enumerated(EnumType.STRING)
+    private RoomStatus status; // WAIT, PROGRESS, FINISH
+
 }
