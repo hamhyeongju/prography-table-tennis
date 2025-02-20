@@ -1,10 +1,10 @@
 package prography.table_tennis.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.*;
 import prography.table_tennis.dto.CreateRoomRequest;
+import prography.table_tennis.dto.GetRoomsResponse;
 import prography.table_tennis.service.RoomService;
 import prography.table_tennis.util.ApiResponse;
 
@@ -13,6 +13,19 @@ import prography.table_tennis.util.ApiResponse;
 public class RoomController {
 
     private final RoomService roomService;
+
+    @GetMapping("/room")
+    public ApiResponse<GetRoomsResponse> getRoom(
+            @RequestParam("size") int size,
+            @RequestParam("page") int page
+    ) {
+
+        GetRoomsResponse
+                response = roomService.getRooms(PageRequest.of(page, size));
+
+        return new ApiResponse<>(response);
+    }
+
 
     @PostMapping("/room")
     public ApiResponse<Object> createRoom(@RequestBody CreateRoomRequest request) {

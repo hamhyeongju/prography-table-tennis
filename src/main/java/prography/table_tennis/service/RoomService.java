@@ -2,16 +2,19 @@ package prography.table_tennis.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import prography.table_tennis.domain.Room;
 import prography.table_tennis.domain.User;
 import prography.table_tennis.domain.UserStatus;
-import prography.table_tennis.dto.CreateRoomRequest;
+import prography.table_tennis.dto.*;
 import prography.table_tennis.exception.DomainException;
 import prography.table_tennis.repository.RoomRepository;
 import prography.table_tennis.repository.UserRepository;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -39,5 +42,21 @@ public class RoomService {
 
         Room room = Room.of(request.getTitle(), request.getUserId(), request.getRoomType());
         roomRepository.save(room);
+    }
+
+    public GetRoomsResponse getRooms(PageRequest request) {
+
+        System.out.println("11");
+        Page<Room> findRooms = roomRepository.findAll(request);
+        System.out.println("@2");
+        List<RoomResponse> roomResponses =
+                findRooms.getContent().
+                        stream().map(RoomResponse
+                                ::new).toList();
+        System.out.println("33");
+        return new GetRoomsResponse(
+                (int) findRooms.getTotalElements(),
+                findRooms.getTotalPages(),
+                roomResponses);
     }
 }
