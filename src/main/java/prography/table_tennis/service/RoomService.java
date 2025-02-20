@@ -59,4 +59,11 @@ public class RoomService {
                 findRooms.getTotalPages(),
                 roomResponses);
     }
+
+    public GetRoomResponse getRoom(int roomId) {
+        Room findRoom = roomRepository.findById(roomId)
+                .orElseThrow(DomainException::new);
+
+        return new GetRoomResponse(findRoom);
+    }
 }
