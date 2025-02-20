@@ -20,4 +20,13 @@ public class Room extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private RoomStatus status; // WAIT, PROGRESS, FINISH
 
+    public static Room of(String title, Integer host, RoomType roomType) {
+        Room room = new Room();
+        room.title = title;
+        room.host = host;
+        room.roomType = roomType;
+        room.status = RoomStatus.WAIT;
+        return room;
+    }
+
 }
