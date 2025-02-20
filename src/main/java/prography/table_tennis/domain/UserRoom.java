@@ -13,7 +13,7 @@ public class UserRoom {
     @Column(name = "user_room_id")
     private Integer id;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private Room room;
 

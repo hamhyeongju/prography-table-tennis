@@ -3,6 +3,9 @@ package prography.table_tennis.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -23,8 +26,8 @@ public class Room extends BaseTimeEntity {
     @JoinColumn(name = "host")
     private User host; // userId
 
-    @OneToOne(mappedBy = "room")
-    private UserRoom userRoom;
+    @OneToMany(mappedBy = "room")
+    private List<UserRoom> userRooms = new ArrayList<>();
 
     public static Room of(String title, User host, RoomType roomType) {
         Room room = new Room();
