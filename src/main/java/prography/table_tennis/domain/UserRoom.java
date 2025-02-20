@@ -20,5 +20,6 @@ public class UserRoom {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-    private String team; // RED, BLUE
+    @Enumerated(EnumType.STRING)
+    private Team team; // RED, BLUE
 }
