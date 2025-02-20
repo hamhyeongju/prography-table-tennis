@@ -22,4 +22,12 @@ public class UserRoom {
     private User user;
     @Enumerated(EnumType.STRING)
     private Team team; // RED, BLUE
+
+    public static UserRoom of(User user, Room room, Team team) {
+        UserRoom userRoom = new UserRoom();
+        userRoom.user = user;
+        userRoom.room = room;
+        userRoom.team = team;
+        return userRoom;
+    }
 }
