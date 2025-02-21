@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Service;
@@ -60,14 +61,13 @@ public class RoomService {
         userRoomRepository.save(userRoom);
     }
 
-    public GetRoomsResponse getRooms(PageRequest request) {
+    public GetRoomsResponse getRooms(Pageable pageable) {
 
-        Page<Room> findRooms = roomRepository.findAll(request);
+        Page<Room> findRooms = roomRepository.findAllWithUser(pageable);
 
         List<RoomResponse> roomResponses =
                 findRooms.getContent().
-                        stream().map(RoomResponse
-                                ::new).toList();
+                        stream().map(RoomResponse::new).toList();
 
         return new GetRoomsResponse(
                 (int) findRooms.getTotalElements(),

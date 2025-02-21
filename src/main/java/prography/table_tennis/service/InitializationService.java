@@ -1,7 +1,5 @@
 package prography.table_tennis.service;
 
-import prography.table_tennis.dto.request.InitializationRequest;
-import prography.table_tennis.dto.common.UserBulkInsertDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -9,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import prography.table_tennis.client.FakerApiClient;
 import prography.table_tennis.client.dto.FakeUser;
 import prography.table_tennis.client.dto.FakeUserResponse;
+import prography.table_tennis.dto.common.UserBulkInsertDto;
+import prography.table_tennis.dto.request.InitializationRequest;
 import prography.table_tennis.repository.RoomRepository;
 import prography.table_tennis.repository.UserRepository;
 import prography.table_tennis.repository.jdbcRepository.UserJdbcRepository;

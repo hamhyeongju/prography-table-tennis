@@ -25,6 +25,4 @@ public class User extends BaseTimeEntity {
     @OneToMany(mappedBy = "host")
     private List<Room> rooms;
 
-    @OneToOne(mappedBy = "user")
-    private UserRoom userRoom;
 }
