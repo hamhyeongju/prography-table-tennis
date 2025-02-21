@@ -1,5 +1,6 @@
 package prography.table_tennis.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -10,7 +11,8 @@ import prography.table_tennis.util.ApiResponse;
 import static prography.table_tennis.util.ApiResponseStatus.*;
 
 @RestControllerAdvice
-public class ControllerAdvice {
+@Slf4j
+public class GlobalControllerAdvice {
 
     @ExceptionHandler(DomainException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
