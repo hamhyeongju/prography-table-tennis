@@ -1,4 +1,4 @@
-package prography.table_tennis.controller;
+package prography.table_tennis.controller.advice;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
