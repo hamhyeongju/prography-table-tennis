@@ -30,4 +30,8 @@ public class UserRoom {
         userRoom.team = team;
         return userRoom;
     }
+
+    public void changeTeam(Team changeTeam) {
+        this.team = changeTeam;
+    }
 }
