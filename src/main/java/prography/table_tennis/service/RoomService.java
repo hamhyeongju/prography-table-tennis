@@ -106,7 +106,7 @@ public class RoomService {
         findRoom.start();
         taskScheduler.schedule(
                 () -> stopGame(roomId),
-                Instant.now().plusSeconds(10)
+                Instant.now().plusSeconds(60)
         );
 
     }
