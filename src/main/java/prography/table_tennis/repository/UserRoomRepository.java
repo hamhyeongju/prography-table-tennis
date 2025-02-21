@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import prography.table_tennis.domain.UserRoom;
 
+import java.util.Optional;
+
 public interface UserRoomRepository extends JpaRepository<UserRoom, Integer> {
 
     boolean existsByUserId(int userId);
@@ -17,4 +19,7 @@ public interface UserRoomRepository extends JpaRepository<UserRoom, Integer> {
     @Modifying
     @Query("delete from UserRoom ur where ur.user.id = :userId")
     void deleteByUserId(@Param("userId") int userId);
+
+    @Query("select ur from UserRoom ur join fetch ur.room where ur.user.id = :userId")
+    Optional<UserRoom> findWithRoomByUserId(@Param("userId") int userId);
 }

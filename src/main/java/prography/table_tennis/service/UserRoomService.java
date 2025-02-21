@@ -73,4 +73,20 @@ public class UserRoomService {
         userRoomRepository.deleteByUserId(userId);
 
     }
+
+    public void changeTeam(int userId, int roomId) {
+        Room findRoom = roomRepository.findWithUserByRoomId(roomId)
+                .orElseThrow(DomainException::new);
+
+        // room 상태
+        if (!findRoom.getStatus().equals(RoomStatus.WAIT)) {
+            throw new DomainException();
+        }
+
+        UserRoom findUserRoom = userRoomRepository.findWithRoomByUserId(userId)
+                .orElseThrow(DomainException::new);
+
+        Team changeTeam = teamPolicy.changeTeam(findRoom, findUserRoom);
+        findUserRoom.changeTeam(changeTeam);
+    }
 }
