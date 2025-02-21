@@ -41,4 +41,8 @@ public class Room extends BaseTimeEntity {
     public void finish() {
         this.status = RoomStatus.FINISH;
     }
+
+    public void start() {
+        this.status = RoomStatus.PROGRESS;
+    }
 }
