@@ -35,4 +35,26 @@ public class TeamPolicy {
         return (redCount > blueCount) ? Team.BLUE : Team.RED;
 
     }
+
+    public Team changeTeam(Room room, UserRoom userRoom) {
+        int maxSize = (room.getRoomType() == RoomType.SINGLE) ? 1 : 2;
+
+        List<UserRoom> userRooms = room.getUserRooms();
+
+        long redCount = userRooms.stream().filter(ur -> ur.getTeam() == Team.RED).count();
+        long blueCount = userRooms.stream().filter(ur -> ur.getTeam() == Team.BLUE).count();
+
+        Team team = userRoom.getTeam();
+
+        // 반대 팀의 정원 확인
+        if (team.equals(Team.RED) && blueCount == maxSize) {
+            throw new DomainException();
+        }
+        if (team.equals(Team.BLUE) && redCount == maxSize) {
+            throw new DomainException();
+        }
+
+        // 반대 팀 return
+        return team.equals(Team.RED) ? Team.BLUE : Team.RED;
+    }
 }
