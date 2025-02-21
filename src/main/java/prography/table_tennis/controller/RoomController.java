@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import prography.table_tennis.dto.request.CreateRoomRequest;
+import prography.table_tennis.dto.request.PutStartRoomRequest;
 import prography.table_tennis.dto.response.GetRoomResponse;
 import prography.table_tennis.dto.response.GetRoomsResponse;
 import prography.table_tennis.service.RoomService;
@@ -43,6 +44,15 @@ public class RoomController {
 
         roomService.createRoom(request);
 
+        return new ApiResponse<>();
+    }
+
+    @PutMapping("/room/start/{roomId}")
+    public ApiResponse<Object> game(
+            @RequestBody PutStartRoomRequest request,
+            @PathVariable("roomId") int roomId
+    ) {
+        roomService.startGame(request.getUserId(), roomId);
         return new ApiResponse<>();
     }
 
