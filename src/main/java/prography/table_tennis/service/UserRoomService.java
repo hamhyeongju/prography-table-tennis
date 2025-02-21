@@ -47,4 +47,30 @@ public class UserRoomService {
         UserRoom userRoom = UserRoom.of(findUser, findRoom, autoTeam);
         userRoomRepository.save(userRoom);
     }
+
+    public void out(int userId, int roomId) {
+
+        if (!userRoomRepository.existsByUserId(userId)) {
+            throw new DomainException();
+        }
+
+        Room findRoom = roomRepository.findById(roomId)
+                .orElseThrow(DomainException::new);
+
+        // 방 상태 체크
+        if (!findRoom.getStatus().equals(RoomStatus.WAIT)) {
+            throw new DomainException();
+        }
+
+        // host가 out 요청
+        if (userId == findRoom.getHost().getId()) {
+            userRoomRepository.deleteAllByRoomId(roomId);
+
+            findRoom.finish();
+        }
+
+        // 일반 user가 요청
+        userRoomRepository.deleteByUserId(userId);
+
+    }
 }

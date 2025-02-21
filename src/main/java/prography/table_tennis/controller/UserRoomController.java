@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import prography.table_tennis.dto.request.PostAttentionRequest;
+import prography.table_tennis.dto.request.PostUserRoomOutRequest;
 import prography.table_tennis.service.UserRoomService;
 import prography.table_tennis.util.ApiResponse;
 
@@ -25,5 +26,16 @@ public class UserRoomController {
         userRoomService.attention(request.getUserId(), roomId);
         return new ApiResponse<>();
     }
+
+    @PostMapping("/room/out/{roomId}")
+    public ApiResponse<Object> attention(
+            @RequestBody PostUserRoomOutRequest request,
+            @PathVariable("roomId") int roomId
+    ) {
+
+        userRoomService.out(request.getUserId(), roomId);
+        return new ApiResponse<>();
+    }
+
 
 }
