@@ -3,6 +3,8 @@ package prography.table_tennis.dto.common;
 import lombok.Getter;
 import prography.table_tennis.domain.UserStatus;
 
+import java.time.LocalDateTime;
+
 @Getter
 public class UserBulkInsertDto {
 
@@ -10,6 +12,8 @@ public class UserBulkInsertDto {
     private String name;
     private String email;
     private String status;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public static UserBulkInsertDto createActiveUserDto (Integer fakerId, String name, String email) {
         UserBulkInsertDto dto = createUserBulkInsert(fakerId, name, email);
@@ -33,6 +37,8 @@ public class UserBulkInsertDto {
         dto.fakerId = fakerId;
         dto.name = name;
         dto.email = email;
+        dto.createdAt = LocalDateTime.now();
+        dto.updatedAt = LocalDateTime.now();
         return dto;
     }
 

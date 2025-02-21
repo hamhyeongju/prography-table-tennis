@@ -16,8 +16,8 @@ public class UserJdbcRepository {
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     public void bulkInsertUser(List<UserBulkInsertDto> dtos) {
-        String sql = "INSERT INTO users (faker_id, name, email, status) " +
-                "VALUES (:fakerId, :name, :email, :status)";
+        String sql = "INSERT INTO users (faker_id, name, email, status, created_at, updated_at) " +
+                "VALUES (:fakerId, :name, :email, :status, :createdAt, :updatedAt)";
 
         SqlParameterSource[] sqlParameterSource =
                 dtos.stream().map(
