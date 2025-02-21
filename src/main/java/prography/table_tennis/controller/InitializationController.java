@@ -1,6 +1,6 @@
 package prography.table_tennis.controller;
 
-import prography.table_tennis.dto.InitializationRequest;
+import prography.table_tennis.dto.request.InitializationRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

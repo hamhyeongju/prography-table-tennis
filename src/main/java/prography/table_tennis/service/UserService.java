@@ -5,8 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import prography.table_tennis.domain.User;
-import prography.table_tennis.dto.GetUsersResponse;
-import prography.table_tennis.dto.UserResponse;
+import prography.table_tennis.dto.response.GetUsersResponse;
+import prography.table_tennis.dto.response.UserResponse;
 import prography.table_tennis.repository.UserRepository;
 
 import java.util.List;

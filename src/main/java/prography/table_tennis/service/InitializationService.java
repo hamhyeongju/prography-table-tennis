@@ -1,7 +1,7 @@
 package prography.table_tennis.service;
 
-import prography.table_tennis.dto.InitializationRequest;
-import prography.table_tennis.dto.UserBulkInsertDto;
+import prography.table_tennis.dto.request.InitializationRequest;
+import prography.table_tennis.dto.common.UserBulkInsertDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

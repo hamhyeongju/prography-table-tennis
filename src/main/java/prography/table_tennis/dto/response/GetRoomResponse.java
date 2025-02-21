@@ -1,4 +1,4 @@
-package prography.table_tennis.dto;
+package prography.table_tennis.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;

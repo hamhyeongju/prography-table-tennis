@@ -1,4 +1,4 @@
-package prography.table_tennis.dto;
+package prography.table_tennis.dto.common;
 
 import lombok.Getter;
 import prography.table_tennis.domain.UserStatus;

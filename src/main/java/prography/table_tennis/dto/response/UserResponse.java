@@ -1,9 +1,6 @@
-package prography.table_tennis.dto;
+package prography.table_tennis.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import prography.table_tennis.domain.User;
 
 import java.time.LocalDateTime;

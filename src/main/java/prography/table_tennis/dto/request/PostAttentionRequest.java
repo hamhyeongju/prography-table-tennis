@@ -1,4 +1,4 @@
-package prography.table_tennis.dto;
+package prography.table_tennis.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
