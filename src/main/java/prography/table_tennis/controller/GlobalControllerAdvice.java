@@ -17,6 +17,7 @@ public class GlobalControllerAdvice {
     @ExceptionHandler(DomainException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiResponse<Object> handleDomainException(DomainException e) {
+        log.error("{} - message : {}", e.getClass().getSimpleName(), e.getStackTrace());
         return new ApiResponse<>(WRONG_REQUEST);
     }
 
